@@ -1,74 +1,3 @@
-// import AsyncStorage from '@react-native-async-storage/async-storage'
-// import React, { useEffect, useState } from 'react'
-// import {View,Text, TextInput, Button, StyleSheet, TouchableOpacity,Image} from 'react-native'
-
-// export default function Home ({navigation}) {
-//     const [data, setData] = useState([])
-
-//     const dataDusun =() => {
-//         AsyncStorage.getItem('token')
-//         .then(nilai => {
-//             console.log('token', nilai)
-//             setLoading(true)
-//             return fethh('https://dev-disambi.sandboxindonesia.id/api/dusun/',{
-//                 method:'GET',
-//                 header: {
-//                     Accept: 'aplication/json',
-//                     'Content-Type' : 'aploication/json',
-//                     "Authorization": 'Bearer '+ nilai
-//                 },
-//             })
-//             .then(response => response.json())
-//             .then(json => {
-//                 console.log ("data dusun", json)
-//                 if(json?.data){
-//                     setData(json?.data)
-//                 }
-//                 setLoading(false)
-//             })
-//             .catch(error => {
-//                 console.error(error);
-//                 setLoading(false)
-//             });
-//         })
-//         .catch(err => console.error(err))
-//     }
-
-//     useEffect(() =>{
-//         dataDusun()
-//             const unsubscribe = navigation.addListener('focus', () => {
-//                 dataDusun()
-//              })
-        
-//     })
-//     return(
-//         <View style={styles.container}>
-//             <View>
-//                 <Image source={require('../../asset/Disambi.png')} style={styles.logo}/>
-//             </View>
-//         </View>
-//     )
-// }
-
-// const styles = StyleSheet.create({
-// 	container:{
-// 		flex:1,
-// 		backgroundColor:'white',
-// 		alignItems:'center',
-// 		justifyContent:'center'
-// 	},
-// 	logo:{
-// 		width:100,
-// 		height:100
-// 	},
-// 	text:{
-// 		fontSize:25,
-// 		fontWeight:'bold',
-// 		color:'black',
-// 		marginBottom:20
-//     }
-// })
-
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useState, useEffect } from 'react'
 import {View,Text, StyleSheet, Image, TouchableOpacity, FlatList} from 'react-native'
@@ -93,7 +22,7 @@ const Home = ({navigation}) => {
                 headers: {
                   Accept: 'application/json',
                   'Content-Type': 'application/json',
-                  "Authorization": 'Bearer '+ nilai
+                  "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTE4YTE2MmMtYmNjMi00NGNlLThkNmItM2FmODM3MTdmOTRkIiwicm9sZV9jb2RlIjoiQURNSU4iLCJpZCI6IjY1YWFmYTQ3LTY1ZjktNGQ4MS1hMzIxLTYxNGU1M2VmMjFlNiIsImV4cCI6MTcyNzUxODUwNSwibmJmIjoxNzI3NTE0OTA1LCJpYXQiOjE3Mjc1MTQ5MDV9.Aeo8ZYHjKUOy48OZy_aV_XzkCBN2agGpQvwGg64KUeU'
                 },
                 
               })
@@ -132,16 +61,14 @@ const Home = ({navigation}) => {
     
      const renderItem = ({item, index}) => {
         return (
-            <View style={styles.header}>
-             <TouchableOpacity activeOpacity={1} onPress={()=>  navigation.navigate('Login')}>
+            
             <View style={styles.header1}>
                  <View style={styles.Tepi}></View>
                  <Image source={require('../../asset/home3.png')} style={styles.icon}/>
                  <Text style ={styles.Text1}>{item?.name}</Text>
                  <Image source={require('../../asset/slide-right.png')} style={styles.icon1}/>
             </View>
-            </TouchableOpacity>
-       </View>
+       
         )
     }
 
@@ -214,7 +141,7 @@ const styles = StyleSheet.create ({
         backgroundColor:'#ffff',
         alignItems:'center',
         flexDirection:'row',
-        marginTop:15,
+        marginTop:10,marginBottom:5,
         borderRadius:5,
         elevation:5
     },
@@ -246,8 +173,8 @@ const styles = StyleSheet.create ({
     iconadd:{
         width:60,
         height:60,
-        top: 500,              // jarak dari atas 50 unit
-        left: 110,             // jarak dari kiri 30 unit
+        // top: 500,              // jarak dari atas 50 unit
+        // left: 110,             // jarak dari kiri 30 unit
         position:'absolute'
     },
     Text:{
