@@ -15,14 +15,14 @@ const Home = ({navigation}) => {
 
     const getDataDusun = () => {
         AsyncStorage.getItem("token")
-        .then(nilai => {
-            console.log('token', nilai)
+        .then(value => {
+            console.log('token', value)
             return fetch('https://dev-disambi.sandboxindonesia.id/api/dusun/',{
                 method: 'GET',
                 headers: {
                   Accept: 'application/json',
                   'Content-Type': 'application/json',
-                  "Authorization": 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNTE4YTE2MmMtYmNjMi00NGNlLThkNmItM2FmODM3MTdmOTRkIiwicm9sZV9jb2RlIjoiQURNSU4iLCJpZCI6IjY1YWFmYTQ3LTY1ZjktNGQ4MS1hMzIxLTYxNGU1M2VmMjFlNiIsImV4cCI6MTcyNzUxODUwNSwibmJmIjoxNzI3NTE0OTA1LCJpYXQiOjE3Mjc1MTQ5MDV9.Aeo8ZYHjKUOy48OZy_aV_XzkCBN2agGpQvwGg64KUeU'
+                  "Authorization": 'Bearer '+value
                 },
                 
               })
@@ -173,8 +173,8 @@ const styles = StyleSheet.create ({
     iconadd:{
         width:60,
         height:60,
-        // top: 500,              // jarak dari atas 50 unit
-        // left: 110,             // jarak dari kiri 30 unit
+        top: 500,              // jarak dari atas 50 unit
+        left: 110,             // jarak dari kiri 30 unit
         position:'absolute'
     },
     Text:{
@@ -190,3 +190,4 @@ const styles = StyleSheet.create ({
         marginLeft:15
     }
 })
+
