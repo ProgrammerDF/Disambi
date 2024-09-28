@@ -1,7 +1,118 @@
+// import AsyncStorage from '@react-native-async-storage/async-storage'
+// import React, { useState } from 'react'
+// import {View, Text, Image, TouchableOpacity, StyleSheet, StatusBar, TextInputComponent, TextInput, Alert } from 'react-native'
+
+// export default function Login (navigation) {
+// 	const [username,setUsername] = useState('')
+// 	const [password,usePassword] =useState('')
+
+// 	const login =() => {
+// 		return fetch('https://dev-disambi.sandboxindonesia.id/api/auth/login/',{
+// 			method:'POST',
+// 			headers: {
+// 				Accept:'aplicatin/json',
+// 			'Content-Type' :  'aplicatin/json',
+// 			},
+// 			body: JSON.stringify({
+// 				username:username,
+// 				password:password
+// 			}),
+// 		})
+// 		.then (response => response.json())
+// 		.then(json => {
+// 			if(json?.data){
+// 				AsyncStorage.setItem('token',json?.data?.acces_token)
+// 				console.log(json)
+// 				navigation.navigate('Home')
+// 			}
+// 			else{
+// 				Alert.alert(json?.message)
+// 			}
+// 		})
+// 		.catch(error => {
+// 			console.error(error);
+// 		})
+			
+// 	}
+//     return (
+//         <View style={styles.container}>
+//             <Image source={require('../../asset/Disambi.png')}
+// 				style={styles.logo}
+// 			/>
+// 			<Text style={styles.text}>DISAMBI</Text>
+// 			<View>
+// 				<Text style={styles.text1}>Username</Text>
+// 				<View style={styles.Input}>
+// 				<TextInput style={{color:'black', marginLeft:10}} placeholder='Masukkan Username' placeholderTextColor={"gray"} value={username} onChangeText={text => setUsername(text)}/>
+// 		    	</View>
+// 			</View>
+			
+// 			<View>
+// 				<Text style={styles.text1}>Password</Text>
+// 				<View style={styles.Input}>
+// 				<TextInput style={{color:'black', marginLeft:10}} placeholder='Masukkan Password' placeholderTextColor={"gray"} value={password} onChangeText={text => usePassword(text)}/>
+// 		    	</View>
+// 			</View>
+// 			<TouchableOpacity style={styles.Login} onPress={() => login()}>
+// 				<Text  style={styles.text2}>Login</Text>
+// 			</TouchableOpacity>
+//         </View>
+//     )
+// }
+
+// const styles = StyleSheet.create({
+// 	container:{
+// 		flex:1,
+// 		backgroundColor:'white',
+// 		alignItems:'center',
+// 		justifyContent:'center'
+// 	},
+// 	logo:{
+// 		width:100,
+// 		height:100
+// 	},
+// 	text:{
+// 		fontSize:25,
+// 		fontWeight:'bold',
+// 		color:'black',
+// 		marginBottom:20
+// 	},
+// 	text2:{
+// 		fontSize:15,
+// 		fontWeight:'semibold',
+// 		color:'white',
+// 	},
+// 	text1:{
+// 		color:'black', 
+// 		fontSize:15, 
+// 		marginBottom:5,
+// 		fontWeight:'semibold'
+// 	},
+// 	Input:{
+// 		borderRadius:5, 
+// 		borderColor:'silver',
+// 		borderWidth:1,
+// 		height:45, 
+// 		width:350,
+		
+// 	},
+// 	Login:{
+// 		backgroundColor:'#0076d6',
+// 		alignItems:'center',
+// 		justifyContent:'center',
+// 		borderRadius:5, 
+// 		borderColor:'silver',
+// 		height:45, 
+// 		width:350,
+// 		marginTop:20
+// 	}
+// })			
+
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import React, { useEffect, useState } from 'react'
 import {View,Text, TextInput, Button, Alert, TouchableOpacity,Image} from 'react-native'
 
-const Login = () => {
+const Login = ({navigation}) => {
 	const [username,setUsername] = useState('')
 	const [password,setPassword] = useState('')
 	const [isLamp, setIsLamp] = useState(false)
@@ -31,7 +142,10 @@ const Login = () => {
 		.then(response => response.json())
 		.then(json => {
 			if(json?.data){
-				Alert.alert("Anda berhasil login")
+				AsyncStorage.setItem('token', json?.data?.acces_token);
+				console.log(json)
+				navigation.navigate('Home')
+
 			}
 			else{
 				Alert.alert(json?.message)
